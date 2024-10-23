@@ -24,6 +24,7 @@ export default class Game {
     this.sound = new Audio 
     this.sound.src = 'Balloon Pop 1.wav'
     this.player = new Player(this)
+    this.pumpkin = new Pumpkin(this)
   }
 
   update(deltaTime) {
@@ -63,6 +64,7 @@ export default class Game {
         this.sound.play();
         enemy.markedForDeletion = true
         if (enemy.type === 'candy') {
+          this.player.lives+=2
           this.player.ammo += 5
         }
       }
@@ -75,6 +77,13 @@ export default class Game {
             this.sound.play();
           }
           projectile.markedForDeletion = true
+          if (enemy.type === 'candy') {
+            this.player.lives++
+            this.player.ammo += 5
+          }
+
+
+          
         }
       })
     })

@@ -1,5 +1,6 @@
-export default {
-    // config options
+import { defineConfig } from 'vite'
 
-    build: {}
-  }
+// https://vitejs.dev/config/
+export default defineConfig({
+  base: '/game-base',
+})

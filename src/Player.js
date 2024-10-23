@@ -1,5 +1,6 @@
 import Projectile from './Projectile.js'
 import Idle from './assets/Idle.png'
+import Running from './assets/Run.png'
 export default class Player {
   constructor(game) {
     this.game = game
@@ -96,9 +97,28 @@ export default class Player {
     this.projectiles = this.projectiles.filter(
       (projectile) => !projectile.markedForDeletion
     )
+
+
+    if(this.speedX>0 || this.speedY> 0){
+this.image.src=Running
+this.flip=false
+    }else{
+      this.image.src = Idle
+    }
+
+    if(this.speedX<0 || this.speedY<0){
+     this.flip=true
+      this.image.src=Running
+    }
   }
 
   draw(context) {
+    if(this.flip){
+      context.save()
+      context.scale(-1,1) 
+
+    }
+   
  context.drawImage(
       this.image,
       this.frameX * this.width,
@@ -111,7 +131,10 @@ export default class Player {
       this.height
   
   
-    )
+    ) 
+    if(this.flip){
+      context.restore()
+    }
     context.restore()
 
 
